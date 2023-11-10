@@ -90,7 +90,7 @@ getifaddrs2(struct ifaddrs **ifap, int af, int siocgifconf, int siocgifflags,
 			ret = ENOMEM;
 			goto error_out;
 		}
-		ifconf.ifc_len = (int)buf_size;
+		ifconf.ifc_len = (short int)buf_size;
 		ifconf.ifc_buf = buf;
 
 		/*

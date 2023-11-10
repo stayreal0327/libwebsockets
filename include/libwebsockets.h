@@ -24,8 +24,8 @@
 
 /** @file */
 
-#ifndef LIBWEBSOCKET_H_3060898B846849FF9F88F5DB59B5950C
-#define LIBWEBSOCKET_H_3060898B846849FF9F88F5DB59B5950C
+#ifndef INCLUDE_LIBWEBSOCKETS_H
+#define INCLUDE_LIBWEBSOCKETS_H
 
 #ifdef __cplusplus
 #include <cstddef>
@@ -670,4 +670,4 @@ struct lws;
 }
 #endif
 
-#endif
+#endif // INCLUDE_LIBWEBSOCKETS_H

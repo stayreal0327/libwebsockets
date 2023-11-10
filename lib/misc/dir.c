@@ -131,9 +131,9 @@ lws_dir(const char *dirpath, void *user, lws_dir_callback_function cb)
 	}
 
 	for (i = 0; i < n; i++) {
-#if !defined(__sun)
-		unsigned int type = namelist[i]->d_type;
-#endif
+// #if !defined(__sun)
+// 		unsigned int type = namelist[i]->d_type;
+// #endif
 		if (strchr(namelist[i]->d_name, '~'))
 			goto skip;
 		lde.name = namelist[i]->d_name;
@@ -143,32 +143,32 @@ lws_dir(const char *dirpath, void *user, lws_dir_callback_function cb)
 		 * files are LDOT_UNKNOWN
 		 */
 
-#if defined(__sun)
+// #if defined(__sun)
 		lws_dir_via_stat(combo, l, namelist[i]->d_name, &lde);
-#else
-		/*
-		 * XFS on Linux doesn't fill in d_type at all, always zero.
-		 */
+// #else
+// 		/*
+// 		 * XFS on Linux doesn't fill in d_type at all, always zero.
+// 		 */
 
-		if (DT_BLK != DT_UNKNOWN && type == DT_BLK)
-			lde.type = LDOT_BLOCK;
-		else if (DT_CHR != DT_UNKNOWN && type == DT_CHR)
-			lde.type = LDOT_CHAR;
-		else if (DT_DIR != DT_UNKNOWN && type == DT_DIR)
-			lde.type = LDOT_DIR;
-		else if (DT_FIFO != DT_UNKNOWN && type == DT_FIFO)
-			lde.type = LDOT_FIFO;
-		else if (DT_LNK != DT_UNKNOWN && type == DT_LNK)
-			lde.type = LDOT_LINK;
-		else if (DT_REG != DT_UNKNOWN && type == DT_REG)
-			lde.type = LDOT_FILE;
-		else if (DT_SOCK != DT_UNKNOWN && type == DT_SOCK)
-			lde.type = LDOTT_SOCKET;
-		else {
-			lde.type = LDOT_UNKNOWN;
-			lws_dir_via_stat(combo, l, namelist[i]->d_name, &lde);
-		}
-#endif
+// 		if (DT_BLK != DT_UNKNOWN && type == DT_BLK)
+// 			lde.type = LDOT_BLOCK;
+// 		else if (DT_CHR != DT_UNKNOWN && type == DT_CHR)
+// 			lde.type = LDOT_CHAR;
+// 		else if (DT_DIR != DT_UNKNOWN && type == DT_DIR)
+// 			lde.type = LDOT_DIR;
+// 		else if (DT_FIFO != DT_UNKNOWN && type == DT_FIFO)
+// 			lde.type = LDOT_FIFO;
+// 		else if (DT_LNK != DT_UNKNOWN && type == DT_LNK)
+// 			lde.type = LDOT_LINK;
+// 		else if (DT_REG != DT_UNKNOWN && type == DT_REG)
+// 			lde.type = LDOT_FILE;
+// 		else if (DT_SOCK != DT_UNKNOWN && type == DT_SOCK)
+// 			lde.type = LDOTT_SOCKET;
+// 		else {
+// 			lde.type = LDOT_UNKNOWN;
+// 			lws_dir_via_stat(combo, l, namelist[i]->d_name, &lde);
+// 		}
+// #endif
 		if (cb(dirpath, user, &lde)) {
 			while (i < n)
 				free(namelist[i++]);

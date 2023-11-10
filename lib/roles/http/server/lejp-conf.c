@@ -297,10 +297,10 @@ lejp_globals_cb(struct lejp_ctx *ctx, char reason)
 
 	switch (ctx->path_match - 1) {
 	case LEJPGP_UID:
-		a->info->uid = (unsigned int)atoi(ctx->buf);
+		a->info->uid = (int)atoi(ctx->buf);
 		return 0;
 	case LEJPGP_GID:
-		a->info->gid = (unsigned int)atoi(ctx->buf);
+		a->info->gid = (int)atoi(ctx->buf);
 		return 0;
 	case LEJPGP_USERNAME:
 		a->info->username = a->p;

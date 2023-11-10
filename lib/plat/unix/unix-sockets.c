@@ -220,29 +220,29 @@ lws_plat_set_socket_options_ip(lws_sockfd_type fd, uint8_t pri, int lws_flags)
 	int en;
 #endif
 
-#if !defined(__APPLE__) && \
+/* #if !defined(__APPLE__) && \
       !defined(__FreeBSD__) && !defined(__FreeBSD_kernel__) &&        \
       !defined(__NetBSD__) && \
       !defined(__OpenBSD__) && \
       !defined(__sun) && \
       !defined(__HAIKU__) && \
-      !defined(__CYGWIN__)
+      !defined(__CYGWIN__) */
 
 	/* the BSDs don't have SO_PRIORITY */
 
-	if (pri) { /* 0 is the default already */
-		if (setsockopt(fd, SOL_SOCKET, SO_PRIORITY,
-				(const void *)&optval, optlen) < 0) {
-#if !defined(LWS_WITH_NO_LOGS)
-			en = errno;
-			lwsl_warn("%s: unable to set socket pri %d: errno %d\n",
-				  __func__, (int)pri, en);
-#endif
-			ret = 1;
-		} else
-			lwsl_notice("%s: set pri %u\n", __func__, pri);
-	}
-#endif
+//	if (pri) { /* 0 is the default already */
+// 		if (setsockopt(fd, SOL_SOCKET, SO_PRIORITY,
+// 				(const void *)&optval, optlen) < 0) {
+// #if !defined(LWS_WITH_NO_LOGS)
+// 			en = errno;
+// 			lwsl_warn("%s: unable to set socket pri %d: errno %d\n",
+// 				  __func__, (int)pri, en);
+// #endif
+// 			ret = 1;
+// 		} else
+// 			lwsl_notice("%s: set pri %u\n", __func__, pri);
+// 	}
+// #endif
 
 	for (n = 0; n < 4; n++) {
 		if (!(lws_flags & ip_opt_lws_flags[n]))
